@@ -6,3 +6,12 @@ export async function registerFinance({ user, value, type }) {
     [user.id, value, type]
   );
 }
+
+export async function selectAllUserFinance({ user }) {
+  const events = await connection.query(
+    `SELECT * FROM "financialEvents" WHERE "userId"=$1 ORDER BY "id" DESC`,
+    [user.id]
+  );
+
+  return events;
+}
